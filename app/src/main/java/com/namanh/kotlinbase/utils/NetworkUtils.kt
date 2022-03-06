@@ -8,6 +8,6 @@ object NetworkUtils {
         if (context == null) return false
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = cm.activeNetworkInfo
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting
+        return activeNetwork?.isConnected == true
     }
 }

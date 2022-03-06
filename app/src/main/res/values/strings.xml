@@ -2,6 +2,7 @@
     <string name="app_name">KotlinBase</string>
     <string name="database_name">kotlin_base</string>
 
+    <string name="connection_ready">Đã có kết nối Internet. Vui lòng tải lại trang!</string>
     <string name="please_check_internet_connect">Vui lòng kiểm tra lại kết nối Internet của bạn!</string>
     <string name="other_error">Đã có lỗi xảy ra!</string>
     <string name="button_reconnect">Tải lại</string>
