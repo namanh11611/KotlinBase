@@ -11,8 +11,9 @@ import com.namanh.kotlinbase.viewmodel.SharedViewModel
 
 abstract class BaseFragment<BD: ViewBinding> : Fragment() {
 
+    private var _binding: BD? = null
+
     val mSharedViewModel: SharedViewModel by activityViewModels()
-    var _binding: BD? = null
     val binding: BD
         get() = _binding!!
 

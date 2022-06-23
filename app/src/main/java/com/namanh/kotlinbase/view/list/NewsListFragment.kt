@@ -25,10 +25,6 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>(), View.OnClickLi
         SUCCESS, LOADING, ERROR
     }
 
-    companion object {
-        fun newInstance() = NewsListFragment()
-    }
-
     private val viewModel: NewsListViewModel by viewModels()
     private val mNewsAdapter = NewsAdapter(emptyList())
 
@@ -37,8 +33,8 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>(), View.OnClickLi
         container: ViewGroup?
     ) = FragmentNewsListBinding.inflate(inflater, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.btReconnect.setOnClickListener(this)
         binding.listNews.layoutManager =
@@ -63,7 +59,7 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>(), View.OnClickLi
     }
 
     private fun observeNews() {
-        viewModel.items.observe(viewLifecycleOwner, { result ->
+        viewModel.items.observe(viewLifecycleOwner) { result ->
             when {
                 result is ResourceState.Success && result.data.isNotEmpty() -> {
                     setSuccessState(result.data)
@@ -71,7 +67,7 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>(), View.OnClickLi
                 result is ResourceState.Error -> setErrorState(result.message)
                 else -> setErrorState(getString(R.string.other_error))
             }
-        })
+        }
     }
 
     private fun setSuccessState(result: List<News>) {
