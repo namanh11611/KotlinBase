@@ -3,13 +3,17 @@ package com.namanh.kotlinbase.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.namanh.kotlinbase.R
+import com.namanh.kotlinbase.data.model.News
 import com.namanh.kotlinbase.databinding.ItemNewsBinding
 import com.namanh.kotlinbase.helper.GlideHelper
-import com.namanh.kotlinbase.data.model.News
+import com.namanh.kotlinbase.utils.AppUtils
 
-class NewsAdapter(var dataSet: List<News>) :
-    RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+class NewsAdapter(var dataSet: List<News>) : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: ItemNewsBinding) : RecyclerView.ViewHolder(binding.root),
         View.OnClickListener {
@@ -17,7 +21,7 @@ class NewsAdapter(var dataSet: List<News>) :
         private lateinit var mNews: News
 
         init {
-            binding.root.setOnClickListener(this)
+            binding.clNews.setOnClickListener(this)
         }
 
         fun bind(news: News) {
@@ -30,9 +34,9 @@ class NewsAdapter(var dataSet: List<News>) :
         }
 
         override fun onClick(v: View?) {
-//            val bundle = bundleOf(AppUtils.PRODUCT_KEY to Gson().toJson(mNews))
-//            binding.root.findNavController()
-//                .navigate(R.id.action_newsListFragment_to_newsDetailFragment, bundle)
+            val bundle = bundleOf(AppUtils.NAV_NEWS_ITEM to Gson().toJson(mNews))
+            binding.root.findNavController()
+                .navigate(R.id.action_newsListFragment_to_newsDetailFragment, bundle)
         }
     }
 
